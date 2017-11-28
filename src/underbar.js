@@ -264,14 +264,20 @@
         obj[key] = item;
       });
     });
-    
-    
     return obj;
   };
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
-  _.defaults = function(obj) {
+  _.defaults = function(obj, ...args) {
+    _.each(args, function (nestedObj) {
+      _.each(nestedObj, function (item, key, object) {
+        if (!obj.hasOwnProperty (key)) {
+          obj[key] = item;
+        }
+      });
+    });
+    return obj;
   };
 
 
