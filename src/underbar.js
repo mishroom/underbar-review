@@ -171,11 +171,25 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
-    var newCollection = collection.slice(0);
-    if (arguments.length !== 3) {
-      accumulator = collection [0];
-      newCollection = collection.slice(1);
+    if (Array.isArray(collection)) {
+      var newCollection = collection.slice(0);
+      if (arguments.length !== 3) {
+        accumulator = collection [0];
+        newCollection = collection.slice(1);
+      }
+    } else {
+      var newCollection = collection;
+      if (arguments.length !== 3) {
+        accumulator = collection [Object.keys(collection)[0]];
+        delete newCollection[Object.keys(collection)[0]];
+      }
     }
+
+  
+
+
+    
+    
     //return single value ie accumulator
     //fore ach apply iterator, with 2 values, accumulator and next value in collectin
     _.each(newCollection, function (element) {
