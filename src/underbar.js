@@ -225,9 +225,9 @@
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
     //return _.every(collection, !iterator);
-//if !_.every===false, then return false. in all other results, return true
-//[true, false, true] ==> _.every false >> !_.every true
-    if (!iterator) {
+    //if !_.every===false, then return false. in all other results, return true
+    //[true, false, true] ==> _.every false >> !_.every true
+    if (!iterator) { 
       iterator = _.identity;
     }
     var isSome = false;
