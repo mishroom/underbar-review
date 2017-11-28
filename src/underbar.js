@@ -104,6 +104,19 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+    // var unique = function (element) {
+      
+    // }
+    var ouputArray = [];
+    var collection = array.sort(function(a, b) {
+      return a - b;
+    });
+    _.each(collection, function(element, index, array) {
+      if (element !== array[index - 1]) {
+        ouputArray.push(element);
+      }
+    });
+    return ouputArray;
   };
 
 
