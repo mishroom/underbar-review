@@ -185,11 +185,6 @@
       }
     }
 
-  
-
-
-    
-    
     //return single value ie accumulator
     //fore ach apply iterator, with 2 values, accumulator and next value in collectin
     _.each(newCollection, function (element) {
@@ -213,13 +208,35 @@
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
-    // TIP: Try re-using reduce() here.
+    if (!iterator) {
+      iterator = _.identity;
+    }
+    var isEvery = true;
+    _.each(collection, function(item) {
+      if (!iterator(item)) {
+        isEvery = false;
+      }
+    });
+    return isEvery;
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+    //return _.every(collection, !iterator);
+//if !_.every===false, then return false. in all other results, return true
+//[true, false, true] ==> _.every false >> !_.every true
+    if (!iterator) {
+      iterator = _.identity;
+    }
+    var isSome = false;
+    _.each(collection, function(item) {
+      if (iterator (item)) {
+        isSome = true;      
+      } 
+    });
+    return isSome;
   };
 
 
