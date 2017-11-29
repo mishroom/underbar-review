@@ -310,6 +310,7 @@
       // The new function always returns the originally computed result.
       return result;
     };
+   
   };
 
   // Memorize an expensive function's results by storing them. You may assume
@@ -393,6 +394,7 @@
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
+    
   };
 
   // Zip together two or more arrays with elements of the same index
@@ -489,5 +491,29 @@
   //
   // Note: This is difficult! It may take a while to implement.
   _.throttle = function(func, wait) {
+    var alreadyCalled = false;
+    var result;
+
+    // TIP: We'll return a new function that delegates to the old one, but only
+    // if it hasn't been called before.
+    return function() {
+      // if (!alreadyCalled) {
+      //   // TIP: .apply(this, arguments) is the standard way to pass on all of the
+      //   // infromation from one function call to another.
+      //   result = func.apply(this, arguments);
+      //   alreadyCalled = true;
+      // }
+      if (!alreadyCalled) {
+        // TIP: .apply(this, arguments) is the standard way to pass on all of the
+        // infromation from one function call to another.
+        result = func.apply(this, arguments);
+        alreadyCalled = true;
+        setTimeout(function() {
+          alreadyCalled = false;
+        }, wait);
+      }
+      // The new function always returns the originally computed result.
+      return result;
+    };
   };
 }());
