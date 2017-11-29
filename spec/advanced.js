@@ -119,9 +119,9 @@
 
       it('should take the set intersection of two arrays', function() {
         var stooges = ['moe', 'curly', 'larry'];
-        var leaders = ['moe', 'groucho'];
+        var leaders = ['curly', 'moe', 'groucho'];
 
-        expect(_.intersection(stooges, leaders)).to.eql(['moe']);
+        expect(_.intersection(stooges, leaders)).to.eql(['moe', 'curly']);
       });
 
     });

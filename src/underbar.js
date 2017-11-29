@@ -442,11 +442,45 @@
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+    var output = [];
+    var hash = {};
+    var args = [].slice.call(arguments);
+    
+    _.each(args, function(array) {
+      _.each(array, function(element) {
+        if (hash[element]) {  
+          hash[element]++;
+        } else {
+          hash[element] = 1;
+        }
+      });
+    });
+    _.each(hash, function(value, key, obj) {
+      if (value === args.length) {
+        output.push(key);
+      }
+    });
+    return output;
   };
 
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+  //flatten, everything but first argument
+    var output = [];
+    var args = [].slice.call(arguments).slice(1);
+    var flattened = _.flatten (args);
+    //uniq the flattened arrays
+    var uniqued = _.uniq(flattened);
+    //go through the uniq array and _.each
+    _.each(array, function (element) {
+      if (!_.contains(uniqued, element)) {
+        output.push(element);
+      }
+    });
+    //if element occurs in the first array, slice it out.
+    // ===>OR push elements not in first array into output array 
+    return output;
   };
 
   // Returns a function, that, when invoked, will only be triggered at most once
